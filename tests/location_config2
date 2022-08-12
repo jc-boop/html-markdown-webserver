@@ -1,0 +1,11 @@
+foo "bar";
+
+
+listen   80;
+server_name foo.com;
+
+location /static/ StaticHandler {
+  root /home/ubuntu/sites/foo/;  
+  index index.html index.htm;
+}
+

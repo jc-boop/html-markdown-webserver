@@ -1,0 +1,32 @@
+#foo "bar";
+
+port 80;
+
+location / ErrorHandler {
+}
+
+location /echo EchoHandler { # no args
+}
+
+location /static1 StaticHandler {
+  root ../tests/server_files;
+}
+
+location /static2 StaticHandler {
+  root ../tests/server_files2;
+}
+
+location /api CRUDHandler {
+  root ../tests/server_files3;
+}
+
+location /health HealthHandler {
+}
+
+location /sleep SleepHandler {
+}
+
+location /markdown MarkdownHandler {
+  root ../tests/server_files4;
+}
+

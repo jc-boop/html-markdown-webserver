@@ -1,0 +1,8 @@
+foo "bar\'2\'1" ;
+# check escaped single quote
+
+server {
+  listen   80;
+  server_name foo.com;
+  root /home/ubuntu/sites/foo/;
+};

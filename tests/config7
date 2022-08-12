@@ -1,0 +1,7 @@
+foo "bar\"w\"1" ;
+# check escaped single quote
+
+server {
+  listen     8080;       
+
+}

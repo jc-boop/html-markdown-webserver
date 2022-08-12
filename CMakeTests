@@ -1,0 +1,24 @@
+#add_executable(server_echo_test tests/echo_server_test.cc)
+#target_link_libraries(server_echo_test server_lib session_lib reply_lib config_parser_lib logging_lib dispatcher_lib gtest_main)
+
+add_executable(reply_test tests/file_reply_test.cc tests/echo_reply_test.cc tests/http_server_session_test.cc tests/config_parser_test.cc tests/error_reply_test)
+target_link_libraries(reply_test session_lib reply_lib server_lib config_parser_lib logging_lib dispatcher_lib gtest_main Boost::system Boost::log_setup Boost::log)
+
+add_executable(logging_test tests/logging_test.cc)
+target_link_libraries(logging_test logging_lib gtest_main Boost::system Boost::log_setup Boost::log)
+
+# TODO(!): Update with test binary
+gtest_discover_tests(reply_test WORKING_DIRECTORY ${CMAKE_CURRENT_SOURCE_DIR}/tests)
+gtest_discover_tests(logging_test WORKING_DIRECTORY ${CMAKE_CURRENT_SOURCE_DIR}/tests)
+
+# TODO(!): Update with target/test targets
+include(cmake/CodeCoverageReportConfig.cmake)
+generate_coverage_report(TARGETS server server_lib session_lib config_parser_lib reply_lib logging_lib dispatcher_lib TESTS reply_test logging_test)
+
+add_test(NAME integration_test
+   COMMAND ${CMAKE_CURRENT_SOURCE_DIR}/tests/integration_test.sh
+   WORKING_DIRECTORY ${CMAKE_CURRENT_SOURCE_DIR}/tests)
+
+add_test(NAME logging_integration_test
+  COMMAND ${CMAKE_CURRENT_SOURCE_DIR}/tests/logging_integration_test.sh
+  WORKING_DIRECTORY ${CMAKE_CURRENT_SOURCE_DIR}/tests)

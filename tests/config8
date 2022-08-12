@@ -1,0 +1,6 @@
+foo "bar\"w\"1" ;
+
+server {
+  listen     62000;       
+
+}
